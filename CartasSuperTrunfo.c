@@ -1,15 +1,16 @@
 #include <stdio.h>
 
-int main() {
+int main(){
     char estado1[50], estado2[50];
-    char codigoDaCidade1[4], codigoDaCidade2[4];
+    char codigoDaCarta1[4], codigoDaCarta2[4];
     char nomeCidade1[100], nomeCidade2[100];
-    int populacao1, populacao2;
+    unsigned long int populacao1, populacao2;
     float area1, area2;
     float pib1, pib2;
     int pontosTuristicos1, pontosTuristicos2;
     float densidadePopulacional1, densidadePopulacional2;
     float pibPerCapita1, pibPerCapita2;
+    float superPoder1, superPoder2;
 
     // Coletar informações da primeira carta com scanf e fgets
     printf("----- Primeira Carta -----\n");
@@ -18,7 +19,7 @@ int main() {
     scanf(" %50[^\n]", estado1);
 
     printf("Digite o código da Carta: ");
-    scanf("%s", codigoDaCidade1);
+    scanf("%s", codigoDaCarta1);
 
     printf("Digite o nome da Cidade: ");
     scanf(" %99[^\n]", nomeCidade1);
@@ -42,14 +43,17 @@ int main() {
     // PIB inserido em bilhões de reais; multiplicamos por 100.000.000 para converter em reais.
     pibPerCapita1 = (pib1 * 100000000) / populacao1;
 
-    // Segunda carta
+    // Calculando Super Poder da primeira carta
+    superPoder1 = populacao1 + area1 + pib1 + pibPerCapita1 + (1 / densidadePopulacional1) + pontosTuristicos1;
+
+    // Coletar informações da segunda carta com scanf e fgets
     printf("\n----- Segunda Carta -----\n");
 
     printf("Digite o nome do Estado: ");
     scanf(" %50[^\n]", estado2);
 
     printf("Digite o código da Carta: ");
-    scanf("%s", codigoDaCidade2);
+    scanf("%s", codigoDaCarta2);
 
     printf("Digite o nome da Cidade: ");
     scanf(" %99[^\n]", nomeCidade2);
@@ -73,11 +77,14 @@ int main() {
     // PIB inserido em bilhões de reais; multiplicamos por 100.000.000 para converter em reais
     pibPerCapita2 = (pib2 * 100000000) / populacao2;
 
+    // Calculando Super Poder da segunda carta
+    superPoder2 = populacao2 + area2 + pib2 + pibPerCapita2 + (1 / densidadePopulacional2) + pontosTuristicos2;
+
     // Exibir a primeira carta Trunfo com printf
     printf("\n----- Info. Primeira Carta -----");
 
     printf("\nEstado: %s", estado1);
-    printf("\nCódigo da Carta: %s", codigoDaCidade1);
+    printf("\nCódigo da Carta: %s", codigoDaCarta1);
     printf("\nCidade: %s", nomeCidade1);
     printf("\nPopulação: %d", populacao1);
     printf("\nÁrea: %.2f Km²", area1);
@@ -85,12 +92,13 @@ int main() {
     printf("\nNúmero de Pontos Turísticos: %d", pontosTuristicos1);
     printf("\nDensidade Populacional: %.2f hab/km²", densidadePopulacional1);
     printf("\nPIB per Capita: %.2f reais", pibPerCapita1);
+    printf("\nSuper Poder: %.1f", superPoder1);
 
     // Exibir a segunda carta Trunfo com printf
-    printf("\n----- Info. Segunda Carta -----");
+    printf("\n\n----- Info. Segunda Carta -----");
 
     printf("\nEstado: %s", estado2);
-    printf("\nCódigo da Carta: %s", codigoDaCidade2);
+    printf("\nCódigo da Carta: %s", codigoDaCarta2);
     printf("\nCidade: %s", nomeCidade2);
     printf("\nPopulação: %d", populacao2);
     printf("\nÁrea: %.2f Km²", area2);
@@ -98,6 +106,18 @@ int main() {
     printf("\nNúmero de Pontos Turísticos: %d", pontosTuristicos2);
     printf("\nDensidade Populacional: %.2f hab/km²", densidadePopulacional2);
     printf("\nPIB per Capita: %.2f reais", pibPerCapita2);
+    printf("\nSuper Poder: %.1f", superPoder2);
 
-    return 0;
+    // Exibir a comparação entre as duas cartas
+    printf("\n\n----- Comparação -----");
+    printf("\nCarta 1 venceu => 1");
+    printf("\nCarta 2 venceu => 0");
+
+    printf("\nPopulação: %d", populacao1 > populacao2);
+    printf("\nÁrea: %d", area1 > area2);
+    printf("\nPIB: %d", pib1 > pib2);
+    printf("\nNúmero de Pontos Turísticos: %d", pontosTuristicos1 > pontosTuristicos2);
+    printf("\nDensidade Populacional: %d", densidadePopulacional1 < densidadePopulacional2);
+    printf("\nPIB per Capita: %d", pibPerCapita1 > pibPerCapita2);
+    printf("\nSuper Poder: %d", superPoder1 > superPoder2);
 }
